@@ -1,0 +1,18 @@
+# https://www.home-assistant.io/integrations/template
+
+template:
+  - binary_sensor:
+      - name: Door_Lock_Open
+        state: >
+          {{ is_state('lock.back_door', 'unlocked') 
+            or is_state('binary_sensor.back_door_open', 'open') }}
+        icon: >
+          {% if is_state('binary_sensor.door_lock_open', 'off') %}
+            mdi:door-closed
+          {% else %}
+            mdi:door-open
+          {% endif %}
+  - sensor:
+    - name: "Lights On Count"
+      state: "{{ states.light | rejectattr('attributes.entity_id', 'defined') | selectattr('state', 'eq', 'on') | list | count }}"
+

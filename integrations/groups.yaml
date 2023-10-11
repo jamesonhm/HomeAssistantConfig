@@ -1,0 +1,23 @@
+
+group:
+  # outside_lights:
+  #   name: outside_lights
+  #   entities:
+    # - light.sengled_front_porch
+    # - light.sengled_patio
+    # - light.sengled_driveway_1
+    # - light.sengled_driveway_2
+    # icon: mdi:outdoor-lamp
+  inside lights:
+    name: inside_lights
+    entities:
+      - switch.basement_main_lights_relay
+      - light.h6182_a5f7
+    icon: mdi:lightbulb-group-outline
+  doors:
+    name: doors
+    entities:
+      - lock.back_door
+      - binary_sensor.back_door_open
+    icon: mdi:door-open
+

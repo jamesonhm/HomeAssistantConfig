@@ -1,0 +1,3 @@
+recorder:
+  db_url: !secret mariadb_ha_logger
+  

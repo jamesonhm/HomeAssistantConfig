@@ -1,0 +1,20 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+  
+
+# group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+homeassistant:
+  packages: !include_dir_named integrations/
+  
+  auth_providers:
+    - type: homeassistant
+    # - type: trusted_networks
+    #   trusted_networks:
+    #     - 192.168.1.0/24
+    
+  

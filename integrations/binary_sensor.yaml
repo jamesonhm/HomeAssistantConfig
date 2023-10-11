@@ -1,0 +1,22 @@
+binary_sensor:
+# PING
+  - name: "Unifi Gateway" 
+    platform: ping
+    host: 192.168.1.1
+    count: 3
+    scan_interval: 30
+  - name: "Unifi 8 Port Switch"
+    platform: ping
+    host: 192.168.1.8
+    count: 3
+    scan_interval: 30
+  - name: "Unifi AP PRO"
+    platform: ping
+    host: 192.168.1.7
+    count: 3
+    scan_interval: 30
+  - name: "Unifi AP LITE"
+    platform: ping
+    host: 192.168.1.146
+    count: 3
+    scan_interval: 30

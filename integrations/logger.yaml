@@ -1,0 +1,7 @@
+logger:
+  default: warning
+  logs:
+    homeassistant.components.govee: info
+    custom_components.govee: info
+    govee_api_laggat: info
+    

@@ -1,0 +1,5 @@
+rest_command:
+  cam_light_on:
+    url: "http://192.168.33.41/control?var=lamp&val=50"
+  cam_light_off:
+    url: "http://192.168.33.41/control?var=lamp&val=0"

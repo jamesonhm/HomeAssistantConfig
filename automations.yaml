@@ -1,0 +1,271 @@
+- id: '1676862804157'
+  alias: Sunset_Outside_On
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: 0
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      brightness_pct: 100
+    target:
+      area_id: outside
+  mode: single
+- id: '1676863030245'
+  alias: Sunrise_Outside_Off
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: 0
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      area_id: outside
+  mode: single
+- id: '1676900215657'
+  alias: noise_off
+  description: ''
+  trigger:
+  - platform: time
+    at: 08:00:00
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.noise_machine_plug_switch_0
+  mode: single
+- id: '1677012560637'
+  alias: noise_machine_on
+  description: ''
+  trigger:
+  - platform: time
+    at: '21:30:00'
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.noise_machine_plug_switch_0
+  mode: single
+- id: '1677158547805'
+  alias: evening-lights
+  description: ''
+  trigger:
+  - platform: time
+    at: '20:45:00'
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      white: 200
+      color_temp: 500
+      brightness: 125
+    target:
+      entity_id:
+      - light.bedroom_jameson_light
+      - light.bedroom_kp_light
+  mode: single
+- id: '1677159912188'
+  alias: watch-tv
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.harmony_hub_watch_roku
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: scene.turn_on
+    data: {}
+    target:
+      entity_id: scene.tv_lights
+  mode: single
+- id: '1678196660479'
+  alias: Test Frigate Notification
+  description: ''
+  use_blueprint:
+    path: hunterjm/frigate_0.10_notification.yaml
+    input:
+      camera: esp32_garage
+      labels:
+      - dog
+      notify_group: notify
+- id: '1680522853566'
+  alias: Crawlspace Water Leak Notify
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.crawlspace_water_leak_water_leak
+    from: 'off'
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  condition: []
+  action:
+  - service: notify.notify
+    data:
+      title: Crawlspace Water Leak
+      message: Water Leak Detected
+  mode: single
+- id: '1680524644282'
+  alias: Low battery level detection & notification
+  description: ''
+  use_blueprint:
+    path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+    input:
+      exclude:
+        entity_id: []
+        device_id:
+        - 8c3ec29c69120032acf461f07847fca4
+        - e8b55a3bf51d22368c302a1473555048
+      actions:
+      - service: notify.notify
+        data:
+          message: '{{sensors}} has a low battery.'
+          title: '{{sensors}} Low Battery'
+- id: '1682480250741'
+  alias: 'Jameson lamp off '
+  description: ''
+  trigger:
+  - type: plugged_in
+    platform: device
+    device_id: 8c3ec29c69120032acf461f07847fca4
+    entity_id: binary_sensor.pixel_6_is_charging
+    domain: binary_sensor
+  condition:
+  - condition: time
+    after: '21:30:00'
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      device_id: 86c741ecf8bd9e3976d9a07804829594
+  mode: single
+- id: '1682513725738'
+  alias: jameson desk lights
+  description: ''
+  use_blueprint:
+    path: slashback/trigger-different-actions-on-a-single-double-or-double-click-on-a-binary-sensor.yaml
+    input:
+      switch_id: binary_sensor.multisensor_basement_bsmt_rotary_button
+      short_click_action:
+      - service: light.toggle
+        data: {}
+        target:
+          device_id: c076cc30935578b3a13ff9a291482fed
+      long_click_action: []
+- id: '1682598307969'
+  alias: desk light dimming
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - number.multisensor_basement_bsmt_rotary_increment
+  condition:
+  - condition: or
+    conditions:
+    - condition: numeric_state
+      entity_id: number.multisensor_basement_bsmt_rotary_increment
+      above: 0
+    - condition: numeric_state
+      entity_id: number.multisensor_basement_bsmt_rotary_increment
+      below: 0
+  action:
+  - choose:
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: device
+          type: is_off
+          device_id: c076cc30935578b3a13ff9a291482fed
+          entity_id: light.h6182_a5f7
+          domain: light
+        - condition: numeric_state
+          entity_id: number.multisensor_basement_bsmt_rotary_increment
+          above: 0
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness: 15
+        target:
+          entity_id: light.h6182_a5f7
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: device
+          type: is_on
+          device_id: c076cc30935578b3a13ff9a291482fed
+          entity_id: light.h6182_a5f7
+          domain: light
+        - condition: numeric_state
+          entity_id: light.h6182_a5f7
+          attribute: brightness
+          above: 10
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step: '{{ (((trigger.to_state.state | float(0)) * 13)) | round(0)
+            }}'
+        target:
+          entity_id: light.h6182_a5f7
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: device
+          type: is_on
+          device_id: c076cc30935578b3a13ff9a291482fed
+          entity_id: light.h6182_a5f7
+          domain: light
+        - condition: numeric_state
+          entity_id: light.h6182_a5f7
+          attribute: brightness
+          below: 10
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.h6182_a5f7
+  mode: queued
+  max: 10
+- id: '1683293298208'
+  alias: desk_light_dimming_2
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.multisensor_basement_rotary_encoder
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: numeric_state
+        entity_id: number.multisensor_basement_bsmt_rotary_brightness
+        below: 1
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.h6182_a5f7
+    - conditions:
+      - condition: numeric_state
+        entity_id: number.multisensor_basement_bsmt_rotary_brightness
+        above: 0
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness: '{{ states("number.multisensor_basement_bsmt_rotary_brightness")
+            | int }}'
+        target:
+          entity_id: light.h6182_a5f7
+  mode: queued
+  max: 10

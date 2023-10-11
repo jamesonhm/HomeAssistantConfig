@@ -1,0 +1,31 @@
+rotary_function:
+  alias: rotary_desk_light_on
+  sequence:
+  - condition: device
+    type: is_off
+    device_id: c076cc30935578b3a13ff9a291482fed
+    entity_id: light.h6182_a5f7
+    domain: light
+  - service: light.turn_on
+    data:
+      brightness_pct: 5
+  mode: single
+  icon: mdi:rotate-360
+rotary_desk_light_dim:
+  alias: rotary_desk_light_dim
+  sequence:
+  - condition: and
+    conditions:
+    - condition: device
+      type: is_on
+      device_id: c076cc30935578b3a13ff9a291482fed
+      entity_id: light.h6182_a5f7
+      domain: light
+    - condition: numeric_state
+      entity_id: light.h6182_a5f7
+      attribute: brightness
+      above: 0
+  - service: light.turn_on
+    data:
+      brightness_step: '{{ (((trigger.to_state.state | float(0)) * 13)) | round(0) }}'
+  mode: single

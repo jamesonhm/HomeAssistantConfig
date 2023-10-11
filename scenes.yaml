@@ -1,0 +1,177 @@
+- id: '1677158957015'
+  name: tv-lights
+  entities:
+    switch.basement_main_lights_relay_2:
+      friendly_name: Basement Main Lights Relay
+      state: 'off'
+    switch.bsmt_centralite_plug:
+      friendly_name: bsmt_centralite_plug
+      state: 'on'
+  icon: mdi:television
+  metadata:
+    switch.basement_main_lights_relay_2:
+      entity_only: true
+    switch.bsmt_centralite_plug:
+      entity_only: true
+- id: '1680094308590'
+  name: Evening Indoor
+  entities:
+    light.bedroom_jameson_light:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      friendly_name: bedroom_jameson_light
+      supported_features: 40
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 2702
+      color_temp: 370
+      hs_color:
+      - 28.391
+      - 65.659
+      rgb_color:
+      - 255
+      - 166
+      - 87
+      xy_color:
+      - 0.526
+      - 0.387
+      state: 'on'
+    light.bedroom_kp_light:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      friendly_name: bedroom_kp_light
+      supported_features: 40
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 2702
+      color_temp: 370
+      hs_color:
+      - 28.391
+      - 65.659
+      rgb_color:
+      - 255
+      - 166
+      - 87
+      xy_color:
+      - 0.526
+      - 0.387
+      state: 'on'
+    switch.bsmt_centralite_plug:
+      friendly_name: bsmt_centralite_plug
+      state: 'on'
+    switch.basement_main_lights_relay_2:
+      friendly_name: Basement Main Lights Relay
+      state: 'off'
+    light.main_couch_lamp_switch_0:
+      supported_color_modes:
+      - onoff
+      friendly_name: main_couch_lamp switch_0
+      supported_features: 0
+      color_mode: onoff
+      state: 'on'
+  icon: mdi:moon-waxing-crescent
+  metadata:
+    light.bedroom_jameson_light:
+      entity_only: true
+    light.bedroom_kp_light:
+      entity_only: true
+    switch.bsmt_centralite_plug:
+      entity_only: true
+    switch.basement_main_lights_relay_2:
+      entity_only: true
+    light.main_couch_lamp_switch_0:
+      entity_only: true
+- id: '1680094797415'
+  name: Sleep
+  entities:
+    lock.back_door:
+      battery_level: 97
+      friendly_name: back door
+      supported_features: 0
+      state: locked
+    switch.basement_main_lights_relay_2:
+      friendly_name: Basement Main Lights Relay
+      state: 'off'
+    light.bedroom_jameson_light:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      friendly_name: bedroom_jameson_light
+      supported_features: 40
+      state: 'off'
+    light.bedroom_kp_light:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      friendly_name: bedroom_kp_light
+      supported_features: 40
+      state: 'off'
+    switch.bsmt_centralite_plug:
+      friendly_name: bsmt_centralite_plug
+      state: 'off'
+  icon: mdi:bed
+  metadata:
+    lock.back_door:
+      entity_only: true
+    switch.basement_main_lights_relay_2:
+      entity_only: true
+    light.bedroom_jameson_light:
+      entity_only: true
+    light.bedroom_kp_light:
+      entity_only: true
+    switch.bsmt_centralite_plug:
+      entity_only: true
+- id: '1680095588675'
+  name: Early
+  entities:
+    light.h6182_a5f7:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 9009
+      min_mireds: 111
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - hs
+      rate_limit_total: 100
+      rate_limit_remaining: -1786
+      rate_limit_reset_seconds: -1680095583.22
+      rate_limit_reset: '1969-12-31T17:00:00'
+      rate_limit_on: 5
+      manufacturer: Govee
+      model: H6182
+      friendly_name: desk_underglow
+      supported_features: 19
+      color_mode: hs
+      brightness: 66
+      hs_color:
+      - 195.059
+      - 100
+      rgb_color:
+      - 0
+      - 190
+      - 255
+      xy_color:
+      - 0.146
+      - 0.237
+      icon: mdi:led-strip-variant
+      state: 'on'
+  icon: mdi:moon-waning-crescent
+  metadata: {}
